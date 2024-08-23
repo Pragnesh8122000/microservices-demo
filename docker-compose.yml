@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  gateway:
+    build: ./gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - users
+      - roles
+      - staff
+
+  users:
+    build: ./user-services
+    ports:
+      - "3001:3001"
+
+  roles:
+    build: ./roles-services
+    ports:
+      - "3002:3002"
+
+  staff:
+    build: ./staff-services
+    ports:
+      - "3003:3003"
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"

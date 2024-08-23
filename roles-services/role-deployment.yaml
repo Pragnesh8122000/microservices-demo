@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roles-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: roles
+  template:
+    metadata:
+      labels:
+        app: roles
+    spec:
+      containers:
+      - name: roles
+        image: pragnesh8122001/role-services:latest
+        ports:
+        - containerPort: 3002
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: role-services
+spec:
+  selector:
+    app: roles
+  ports:
+    - protocol: TCP
+      port: 3002
+      targetPort: 3002
